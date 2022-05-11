@@ -1,6 +1,9 @@
 const express = require("express");
 const bodyparser = require("body-parser");
 const path = require("path");
+const dotenv = require("dotenv");
+
+dotenv.config();
 
 // routes
 const placesRoute = require("./routes/places.routes");
@@ -51,9 +54,7 @@ app.use((error, req, res, next) => {
 // );
 
 mongoose
-	.connect(
-		"mongodb+srv://okpunor:p70kesz3V4rpfglN@cluster0.cch23.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
-	)
+	.connect(process.env.MONGO_URI)
 	.then((res) => {
 		console.log("successfully connected to database");
 		app.listen(PORT, () => {
